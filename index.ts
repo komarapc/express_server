@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import AppRouter from "./router";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
+import cors from "cors";
 config();
 class App {
   private app = express();
@@ -22,6 +23,7 @@ class App {
     this.app.use(AppRouter);
   }
   plugins() {
+    this.app.use(cors({ origin: "*" }));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
   }
